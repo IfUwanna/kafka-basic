@@ -37,14 +37,15 @@ public class ProducerMain {
 
                 // set ProducerRecord
                 String topic = "test";           // topic name
-                Integer partition = 0;               // partition number
-                String key = "key-" + idx;       // key
+                Integer partition = 0;           // partition number (default: Round Robin)
+                String key = "key-" + idx;       // key  (default: null)
                 String data = "record-"+ idx;    // data
-                ProducerRecord<String, String> record = new ProducerRecord<>(topic, data);                  // ProducerRecord(@NotNull String topic, V value)
-                ProducerRecord<String, String> record2 = new ProducerRecord<>(topic, key, data);            // ProducerRecord(@NotNull String topic, K key, V value)
-                ProducerRecord<String, String> record3 = new ProducerRecord<>(topic, partition, key, data); // ProducerRecord(@NotNull String topic, Integer partition, K key, V value)
 
-                // send record (per second)
+                ProducerRecord<String, String> record = new ProducerRecord<>(topic, data);
+                ProducerRecord<String, String> record2 = new ProducerRecord<>(topic, key, data);
+                ProducerRecord<String, String> record3 = new ProducerRecord<>(topic, partition, key, data);
+
+                // send record
                 producer.send(record);
 
                 System.out.println("producer.send() >> [topic:" + topic + "][data:" + data + "]");
