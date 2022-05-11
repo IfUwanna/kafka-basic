@@ -48,7 +48,7 @@ public class ConsumerMain {
 
             List<ConsumerRecord<String, String>> buffer = new ArrayList<>();
             while (true) {
-                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));  // polling interval
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));  // polling interval
                 for (ConsumerRecord<String, String> record : records) {
                     System.out.println(record.value());
                     buffer.add(record);
